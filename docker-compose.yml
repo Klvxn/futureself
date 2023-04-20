@@ -1,0 +1,32 @@
+version: "3"
+
+services:
+  app:
+    build:
+      context: .
+    image: futureself-image
+    command: gunicorn futureSelf.wsgi:application -b 0.0.0.0:8000
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/usr/src
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - rabbit_data:/etc/rabbitmq/data
+
+  celery_worker:
+    image: futureself-image
+    command: celery -A futureSelf worker -l INFO -B -E
+    environment:
+      - CELERY_BROKER_URL=amqp://guest:guest@rabbitmq:5672/
+    depends_on:
+      - app
+      - rabbitmq
+
+volumes:
+  rabbit_data:

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="container-fluid width">
+  <h3 class="heading">Public Letters From The Past</h3>
+  {% for letter in public_letters %}
+    <div class="shadow px-5 py-4 m-5">
+      <p><b> A LETTER FROM {{ letter.date_posted.date }} </b></p>
+      <p>
+        <a href="{{ letter.get_absolute_url }}"> {{ letter|upper }} </a> <br>
+        {{ letter.content|truncatewords:30 }}
+      </p>
+      <p class="text-muted small">🚀 Time travelled: {{ letter.date_posted|timesince:letter.delivery_date }}</p>	
+    </div>
+  {% endfor %}
+</div>
+{% endblock content %}

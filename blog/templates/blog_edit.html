@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="form">
+  <h3 class="heading">Edit Your Blog</h3>
+  <form action="" enctype="multipart/form-data" method="post" class="form-group-lg">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    <div>
+      {{ form.title.errors }}
+      <label for="title">Title</label><br>
+      <textarea name="title" id="title" cols="63" rows="2" maxlength="50">{{ form.title.value }}</textarea>
+    </div>
+    <div class="my-5">
+      <label for="image">Image</label><br>
+      {{ form.image }}
+      <span class="error">{{ form.image.errors }}</span>
+    </div>
+    <div>
+      {{ form.content.errors }}
+      <label for="content">Content</label><br>
+      <textarea name="content" id="content" cols="63" rows="13">{{ form.content.value }}</textarea>
+    </div>
+    <button class="btn btn-primary w-50">Submit</button>
+  </form>
+</div>
+{% endblock %}

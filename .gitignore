@@ -1,7 +1,16 @@
+# Pycharm files
+.idea
+
+# Byte-compiled / optimized / DLL files
 __pycache__
 *.pyc
+
+# Virtual environment / .env
 venv
-db.sqlite3
-.idea
-.dockerignore
 .env
+
+# Static files
+staticfiles
+
+db.sqlite3
+.dockerignore

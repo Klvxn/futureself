@@ -1,5 +1,4 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap'); */
-@import url('https://fonts.googleapis.com/css2?family=Lato&family=Rufina&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 
 body {
     margin: 0;
@@ -20,7 +19,7 @@ li.nav-item {
 
 .form {
     text-align: center;
-    font-family: 'Rufina', serif;
+    font-family: 'Lato', sans-serif;
 }
 
 .errorlist {
@@ -35,8 +34,8 @@ li.nav-item {
     margin: 2rem auto;
 }
 
-.letter-heading {
-    font-family: 'Rufina', serif;
+.letter-heading, h4, h5 {
+    font-family: 'Lato', sans-serif;
     font-weight: lighter;
 }
 
@@ -46,6 +45,10 @@ li.nav-item {
 
 a {
     text-decoration: none;
+}
+
+p, .heading {
+    line-height: 2;
 }
 
 .width {

@@ -22,7 +22,7 @@
         <ul class="nav-item m-2">
           <li class="nav-item"><a class="nav-link" href="{% url 'letter:create_letter' %}">✒️ Write a New Letter</a></li>
           <li class="nav-item"><a class="nav-link" href="{% url 'letter:public_letters' %}">🛋 Read Public Letters</a></li>
-          <li class="nav-item"><a class="nav-link" href="{% url 'blog:blog_list' %}">📒 Blogs</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'blog:blog_list' %}">📒 Blog</a></li>
         </ul>
         <ul class="nav-item m-auto">
           {% if user.is_authenticated %}

@@ -9,7 +9,7 @@
   <span>You can't view or edit your travelling letters until delivered 👀</span>
     <button type="button" class="btn-close float-end" data-bs-dismiss="alert" aria-label="Close" ></button>
 </div>
-<div class="container-fluid width my-3">
+<div class="container-fluid width my-2">
   <div class="np heading">
     <ul class="nav nav-pills mb-3 border border-primary-subtle heading" id="pills-tab" role="tablist">
       <li class="nav-item" role="presentation">
@@ -30,13 +30,14 @@
   <div class="tab-content" id="pills-tabContent">
     <div class="my-5 px-5 tab-pane fade show active" id="pills-travelled"  role="tabpanel" aria-labelledby="pills-travelled-tab">
       {% for t_letter in travelling_letters %}
-      <div class="shadow py-4 px-5 m-5">
-        <p class="blur">
-          {{ t_letter|upper }}<br>
-          {{ t_letter.content|truncatewords:10|safe }}
-        </p>
-        <p>
-          <div class="blur">{{ t_letter.date_posted.date }} &rightarrow; {{ t_letter.delivery_date }}</div>
+      <div class="shadow py-4 px-5 m-4">
+        <div class="blur">
+          <h5>LOREM IPSUM DOLOR SIT AMET, CONSECTETUR ADIPISCING ELIT. </h5>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce rutrum nibh sit amet sagittis fermentum. Donec eget dui eu tellus faucibus vehicula. Interdum et malesuada fames ac ante ipsum primis in faucibus. Integer non rutrum odio. Aliquam vitae imperdiet libero, sollicitudin faucibus ipsum. Suspendisse id purus risus. Aliquam consectetur malesuada tempus. Suspendisse potenti. Suspendisse viverra laoreet odio quis aliquet. Proin facilisis malesuada orci tincidunt sollicitudin. Proin varius nec justo a volutpat.
+          </p>
+          <div>From the past &Longrightarrow; to the future</div>
+        </div>
           <div class="float-end">
             {% if t_letter.audience == "private" %}
               <span class="audience badge bg-info p-2">{{ t_letter.audience }}</span>
@@ -45,7 +46,7 @@
             {% endif %}
           </div>
         </p>
-        <span class="blur small">🚀 Time-travelled: {{ t_letter.date_posted|timesince:t_letter.delivery_date }}</span>
+        <span class="blur small">🚀 Time-travelled: Travelling</span>
       </div>
       {% empty %}
         <h4>You currently do not have any travelling letters. Click <a href="{% url 'letter:create_letter' %}">here</a> to write a new letter </h4>
@@ -54,11 +55,10 @@
 
     <div class="my-5 px-5 tab-pane fade" id="pills-delivered" role="tabpanel" aria-labelledby="pills-delivered-tab">
       {% for letter in delivered_letters %}
-      <div class="shadow px-5 py-4 m-5">
-        <p> 
-          <a href="{{ letter.get_absolute_url }}">{{ letter.title|upper }}</a><br>
-          {{ letter.content|truncatewords:10|safe }}
-        </p>
+      <div class="shadow px-4 py-4 m-4">
+        <p class="text-center"><b> A LETTER FROM {{ letter.date_posted.date }} </b></p>
+        <a href="{{ letter.get_absolute_url }}" class="text-center">{{ letter.title|upper }}</a><br>
+        <p> {{ letter.content|truncatewords:30|safe }} </p>
         <p>
           {{ letter.date_posted.date }} &rightarrow; {{ letter.delivery_date }} <br>
           <div class="float-end">
@@ -72,7 +72,7 @@
         <span class="text-muted small">🚀 Time travelled: {{ letter.date_posted|timesince:letter.delivery_date }}</span>
       </div>
       {% empty %}
-        <h4>No letters delivered yet. But when they arrive from the past, they will be available here.</h4>
+        <h4> 📭 No letters delivered yet. But when they arrive from the past, they will be available here.</h4>
       {% endfor %}
     </div>
   </div>

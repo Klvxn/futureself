@@ -25,51 +25,51 @@
     </div>
     <div class="width">
       <div class="mb-5">
-        <h5> {{ letter.title|upper }} </h5>
+        <h4> {{ letter.title|title }} </h4>
         <p> {{ letter.content|safe }} </p>
       </div>
-      <div class="my-5">
-        {% if request.user == letter.user %}
+      {% if request.user == letter.user %}
+        <div class="my-5">
           <h4>Audience</h4>
           {% if letter.audience == "private" %}
             Currently set to: <span class="badge bg-info p-1">{{ letter.audience }} </span> <br>
             <span>Only you would be able to see this email. </span><br>
             <p>Change audience to: <button class="btn btn-outline-secondary" hx-post="{% url 'letter:update_letter' letter.id %}">Public</button> </p>
           {% else %}
-            Currently set to: <span class="badge bg-secondary p-1">{{ letter.audience }} </span> <br>
+            <p> Currently set to: <span class="badge bg-secondary p-2">{{ letter.audience }} </span> <p>
             <span>Other users will be able to see the content of this letter but your email address won't be visible to the public. </span>
-            <p>Change audience to: <button class="btn btn-outline-info" hx-post="{% url 'letter:update_letter' letter.id %}">🔐 Private</button> </p>
+            <p>Change audience to:  &ThickSpace;<button class="btn btn-outline-info p-1" hx-post="{% url 'letter:update_letter' letter.id %}">🔐 Private</button> </p>
           {% endif %}
-      </div>
-      <div class="my-5">
-        <h4>Delete</h4>
-        <p> This action would delete this letter and cannot be undone. </p>
-        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-          Delete
-        </button>
-        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Delete this Letter?</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                <h4> A Letter from {{ letter.date_posted.date }} </h4>
-                {{ letter.title|title }} <span class="badge bg-info">{{ letter.audience }}</span>
-              </div>
-              <div class="modal-footer">
-                <form action="" method="post">
-                  {% csrf_token %}
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button class="btn btn-danger">Delete</button>
-                </form>
+        </div>
+        <div class="my-5">
+          <h4>Delete</h4>
+          <p> This action would delete this letter and cannot be undone. </p>
+          <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            Delete
+          </button>
+          <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="staticBackdropLabel">Delete this Letter?</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <h4> A Letter from {{ letter.date_posted.date }} </h4>
+                  {{ letter.title|title }} <span class="badge bg-info">{{ letter.audience }}</span>
+                </div>
+                <div class="modal-footer">
+                  <form action="" method="post">
+                    {% csrf_token %}
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button class="btn btn-danger">Delete</button>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-     {% endif %}
+      {% endif %}
     </div>
   {% else %}
     <div class="alert alert-warning  w-50" role="alert">
@@ -79,17 +79,21 @@
       <span>You can't view or edit this letter until delivered.</span>
     </div>
     <div class="heading blur">
-      <span>🚀 Time travelled: {{ letter.date_posted|timesince:letter.delivery_date }}</span> <br>
+      <span>🚀 Time travelled: Travelling</span> <br>
       <h3>A Letter From The Past </h3>	
-      <span>{{ letter.date_posted.date }} &rightarrow; {{ letter.delivery_date }}</span><br>
+      <span>From the past &rightarrow; to the future</span><br>
       {% if request.user == letter.user %}
         <span> 📬 Received: {{ letter.email_address }}</span>
       {% endif %}
     </div>
     <div class="width">
-      <div class="mb-5">
-        <h4 class="blur"> {{ letter.title|upper }} </h4>
-        <p class="blur"> {{ letter.content|safe }} </p>
+      <div class="mb-5 blur">
+        <h4> LOREM IPSUM DOLOR SIT AMET, CONSECTETUR ADIPISCING ELIT </h4>
+        <p> 
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce rutrum nibh sit amet sagittis fermentum. Donec eget dui eu tellus faucibus vehicula. Interdum et malesuada fames ac ante ipsum primis in faucibus. Integer non rutrum odio. Aliquam vitae imperdiet libero, sollicitudin faucibus ipsum. Suspendisse id purus risus. Aliquam consectetur malesuada tempus. Suspendisse potenti. Suspendisse viverra laoreet odio quis aliquet. Proin facilisis malesuada orci tincidunt sollicitudin. Proin varius nec justo a volutpat. Praesent fermentum ligula nec dapibus facilisis. In hac habitasse platea dictumst. Fusce sit amet turpis dictum, pretium mi sit amet, hendrerit metus.
+
+          Curabitur nec dui in nulla mattis lobortis. Aliquam posuere purus et augue rutrum fermentum. Sed viverra tellus mollis, pretium risus in, molestie dolor. Aliquam nec tortor magna. Quisque vel erat id ligula pharetra malesuada. Aliquam erat volutpat. Pellentesque iaculis nibh augue, sed congue nibh dignissim a. Integer posuere, augue at sollicitudin dignissim, mi metus malesuada nulla, sit amet sollicitudin lectus tortor vel urna. In a purus metus. Ut dui enim, egestas in urna quis, tempor efficitur quam.        
+        </p>
       </div>
       <div class="mt-5">
         {% if request.user == letter.user %}

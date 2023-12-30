@@ -25,5 +25,9 @@ urlpatterns = [
     path('blogs/', include('blog.urls')),
 ]
 
+admin.site.site_header = 'Future Self Admin Portal'
+admin.site.site_title = 'Future Self Admin Portal'
+admin.site.index_title = 'Admin Portal'
+
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -33,9 +33,9 @@ class HomeView(CreateView):
 
 @login_required
 def get_my_letters(request):
-    t_queryset = Letter.objects.filter(user=request.user, delivered=False)
-    d_queryset = Letter.objects.filter(user=request.user, delivered=True)
-    context = {'travelling_letters': t_queryset, 'delivered_letters': d_queryset}
+    travelling = Letter.objects.filter(user=request.user, delivered=False)
+    delivered = Letter.objects.filter(user=request.user, delivered=True)
+    context = {'travelling_letters': travelling, 'delivered_letters': delivered}
     return render(request, 'my_letters.html', context)
 
 

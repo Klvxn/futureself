@@ -16,13 +16,18 @@
   {% endif %}
   <h3 class="heading">Our Blog</h3>
   {% for blog in blogs_list %}
-    <div class="shadow-sm py-3 px-5 m-5">
-      <img src="{{ blog.image.url }}" alt="" class=" img-fluid rounded mx-auto d-block p-3" width="500" height="200" >
-      <a href="{{ blog.get_absolute_url }}"> {{ blog|title }}</a> <br> <br>
-      <p>{{ blog.content|truncatewords:20 }}</p>
-      <div id="writer">
-        <span class="small">By {{ blog.writer }}</span><br>
-        <span class="small">{{ blog.date_posted.date|timesince }} ago</span>
+    <div class="col my-5 mx-auto">
+      <div class="d-flex">
+        <img src="{{ blog.image.url }}" alt="" class="flex-start rounded" width="190" height="210">
+        <div class="flex-end px-3" style="width: calc(100% - 190px);">
+          <a href="{{ blog.get_absolute_url }}"> <h5>{{ blog|title }}</h5></a> 
+          <p>{{ blog.content|truncatewords:30 }}</p>
+          <div id="writer">
+            <hr>
+            <span class="small">{{ blog.writer.first_name }} {{ blog.writer.last_name }}</span><br>
+            <span class="small">{{ blog.date_posted.date }}</span>
+          </div>
+        </div>
       </div>
     </div>
   {% endfor %}

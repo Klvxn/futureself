@@ -21,7 +21,7 @@
           <button type="button" class="btn-close float-end" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     {% endif %}
-    {% endfor %}
+  {% endfor %}
 {% endif %}
 <div class="form">
   <h3 class="heading mb-2"> Letter to Your Future Self</h3>
@@ -44,7 +44,7 @@
 
     <div class="flex-2 ">
       <div>
-        <label for="email">Email Address</label><br>
+        <label for="email">Recipient Email Address</label><br>
         <input type="email" name="email_address" id="email_address" placeholder="name@example.com" size="flex-input">
         <span class="error">{{ form.email_address.errors }}</span>
       </div>

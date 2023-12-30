@@ -52,7 +52,12 @@ p, .heading {
 }
 
 .width {
-    padding: 1rem 10rem;
+    margin: 0 auto;
+    width: 65%;
+}
+
+.hover:hover {
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
 }
 
 #writer {
@@ -103,7 +108,7 @@ input, select, textarea {
     padding: 5px;
 }
 
- input:focus, textarea:focus, select:focus {
+input:focus, textarea:focus, select:focus {
     outline-width: 1px;
     outline-color: skyblue;
 }
@@ -141,4 +146,8 @@ input, select, textarea {
 
 .flex-2 div {
     margin-bottom: 4rem ;
+}
+
+input::placeholder, textarea::placeholder {
+    color: beige;
 }

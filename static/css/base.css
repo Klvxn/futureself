@@ -20,6 +20,7 @@ li.nav-item {
 .form {
     text-align: center;
     font-family: 'Lato', sans-serif;
+    margin: 0 auto;
 }
 
 .errorlist {

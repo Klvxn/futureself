@@ -4,8 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.contrib.auth.views import LoginView as Login, LogoutView as Logout
-from django.http import HttpResponseForbidden
-from django.shortcuts import get_object_or_404, render, redirect
+from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import FormView, View
 
@@ -50,33 +49,27 @@ class ManageAccountView(LoginRequiredMixin, View):
     form_class = UpdateUserForm
     template_name = 'manage_account.html'
 
-    def get(self, request, pk):
-        user = get_object_or_404(User, pk=pk)
-        if request.user != user:
-            return HttpResponseForbidden
+    def get(self, request):
+        user = request.user
         form = self.form_class(instance=user)
         context = {'form': form}
         return render(request, self.template_name, context)
         
-    def post(self, request, pk):
-        user = get_object_or_404(User, pk=pk)
-        if request.user != user:
-            return HttpResponseForbidden
+    def post(self, request):
+        user = request.user
         form = self.form_class(instance=user, data=request.POST)
         context = {'form': form}
         if form.is_valid():
             form.save()
             messages.success(request, 'Changes saved!')
-            return redirect(reverse('account:manage_account', args=[user.pk]))
+            return redirect(reverse('account:manage_account'))
         messages.error(request, "Error saving changes.")
         return render(request, self.template_name, context)
 
 
 @login_required
 def delete_account(request, pk):
-    user = get_object_or_404(User, pk=pk)
-    if request.user != user:
-        return HttpResponseForbidden
+    user = request.user
     user.delete()
     messages.success(request, 'Account deleted!')
     return redirect('/')

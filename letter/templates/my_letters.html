@@ -28,14 +28,15 @@
   </div>
 
   <div class="tab-content" id="pills-tabContent">
-    <div class="my-5 px-5 tab-pane fade show active" id="pills-travelled"  role="tabpanel" aria-labelledby="pills-travelled-tab">
+    <div class="my-5 px-4 tab-pane fade show active" id="pills-travelled"  role="tabpanel" aria-labelledby="pills-travelled-tab">
       {% for t_letter in travelling_letters %}
-      <div class="shadow py-4 px-5 m-4">
+      <div class="p-4 my-5">
         <div class="blur">
           <h5>LOREM IPSUM DOLOR SIT AMET, CONSECTETUR ADIPISCING ELIT. </h5>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce rutrum nibh sit amet sagittis fermentum. Donec eget dui eu tellus faucibus vehicula. Interdum et malesuada fames ac ante ipsum primis in faucibus. Integer non rutrum odio. Aliquam vitae imperdiet libero, sollicitudin faucibus ipsum. Suspendisse id purus risus. Aliquam consectetur malesuada tempus. Suspendisse potenti. Suspendisse viverra laoreet odio quis aliquet. Proin facilisis malesuada orci tincidunt sollicitudin. Proin varius nec justo a volutpat.
           </p>
+          <hr>
           <div>From the past &Longrightarrow; to the future</div>
         </div>
           <div class="float-end">
@@ -53,14 +54,15 @@
       {% endfor %}
     </div>
 
-    <div class="my-5 px-5 tab-pane fade" id="pills-delivered" role="tabpanel" aria-labelledby="pills-delivered-tab">
+    <div class="my-5 px-4 tab-pane fade" id="pills-delivered" role="tabpanel" aria-labelledby="pills-delivered-tab">
       {% for letter in delivered_letters %}
-      <div class="shadow px-4 py-4 m-4">
+      <div class="hover p-4 my-5">
         <p class="text-center"><b> A LETTER FROM {{ letter.date_posted.date }} </b></p>
         <a href="{{ letter.get_absolute_url }}" class="text-center">{{ letter.title|upper }}</a><br>
         <p> {{ letter.content|truncatewords:30|safe }} </p>
+        <hr>
         <p>
-          {{ letter.date_posted.date }} &rightarrow; {{ letter.delivery_date }} <br>
+          <div class="float-start">{{ letter.date_posted.date }} &rightarrow; {{ letter.delivery_date }}</div>
           <div class="float-end">
             {% if letter.audience == "private" %}
               <span class="audience badge bg-info p-2">{{ letter.audience }}</span>
@@ -68,8 +70,8 @@
               <span class="audience badge bg-warning p-2">{{ letter.audience }}</span>
             {% endif %}
           </div>
-        </p>
-        <span class="text-muted small">🚀 Time travelled: {{ letter.date_posted|timesince:letter.delivery_date }}</span>
+        </p> <br> <br>
+        <div class="text-muted small">🚀 Time travelled: {{ letter.date_posted|timesince:letter.delivery_date }}</div>
       </div>
       {% empty %}
         <h4> 📭 No letters delivered yet. But when they arrive from the past, they will be available here.</h4>

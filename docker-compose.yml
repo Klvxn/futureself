@@ -1,32 +1,58 @@
 version: "3"
 
 services:
-  app:
+  django_app:
     build:
       context: .
     image: futureself-image
     command: gunicorn futureSelf.wsgi:application -b 0.0.0.0:8000
     ports:
-      - "8000:8000"
+      - 8000:8000
     volumes:
       - .:/usr/src
+    depends_on:
+      postgres_db:
+        condition: service_healthy
 
   rabbitmq:
     image: rabbitmq:3-management-alpine
     ports:
-      - "5672:5672"
-      - "15672:15672"
+      - 5672:5672
+      - 15672:15672
     volumes:
       - rabbit_data:/etc/rabbitmq/data
+    depends_on:
+      - django_app
 
   celery_worker:
     image: futureself-image
     command: celery -A futureSelf worker -l INFO -B -E
     environment:
-      - CELERY_BROKER_URL=amqp://guest:guest@rabbitmq:5672/
+      - CELERY_BROKER_URL=amqp://rabbitmq
     depends_on:
-      - app
+      - django_app
       - rabbitmq
+
+  postgres_db:
+    image: postgres:14.0-alpine
+    volumes: 
+      - postgres_data:/var/lib/psql/data
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    env_file:
+      - .env
+    restart: always
+    ports:
+      - 5432:5432
+    healthcheck:
+      test: ["CMD-SHELL", "pg-isready -U postgres"]
+      interval: 1m30s
+      timeout: 30s
+      retries: 5
+      start_period: 5s
 
 volumes:
   rabbit_data:
+  postgres_data:

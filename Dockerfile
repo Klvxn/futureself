@@ -1,16 +1,24 @@
-ARG PYTHON_VERSION=3.10.4
+ARG PYTHON_VERSION=3.10-slim-buster
 
 FROM python:${PYTHON_VERSION}
 
-WORKDIR /app
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
 
-COPY requirements.txt .
+RUN mkdir -p /code
 
-RUN pip install --upgrade pip && pip install -r requirements.txt
+WORKDIR /code
 
-COPY . .
+COPY requirements.txt /tmp/requirements.txt
+RUN set -ex && \
+    pip install --upgrade pip && \
+    pip install -r /tmp/requirements.txt && \
+    rm -rf /root/.cache/
 
-RUN python manage.py makemigrations && python manage.py migrate
-RUN python manage.py collectstatic --noinput
+COPY . /code
 
+RUN python manage.py makemigrations && \
+    python manage.py migrate && \
+    python manage.py collectstatic --noinput
 
+EXPOSE 8000

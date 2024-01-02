@@ -29,7 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'safe-space'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = bool(os.environ['DEBUG'] == 'True')
 
 ALLOWED_HOSTS = []
 
@@ -51,6 +51,7 @@ INSTALLED_APPS = [
 
     # Other apps
     'django_htmx',
+    'django_celery_results'
 ]
 
 MIDDLEWARE = [
@@ -89,12 +90,21 @@ WSGI_APPLICATION = 'futureSelf.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+sqlite = {
+    'ENGINE': 'django.db.backends.sqlite3',
+    'NAME': BASE_DIR / 'db.sqlite3',
 }
+postgres = {
+    'ENGINE': 'django.db.backends.postgresql',
+    'NAME': os.environ['POSTGRES_DB'],
+    'HOST': os.environ['POSTGRES_HOST'],
+    'USER': os.environ['POSTGRES_USER'],
+    'PASSWORD': os.environ['POSTGRES_PASSWORD'],
+    'PORT': '5432'
+}
+
+DATABASES = {}
+DATABASES['default'] = sqlite
 
 
 # Password validation
@@ -134,9 +144,9 @@ USE_TZ = False
 
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "staticfiles"),
+    os.path.join(BASE_DIR, "static"),
 ]
-STATIC_ROOT = os.path.join(BASE_DIR, "static/")
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles/")
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # Media files
@@ -155,8 +165,14 @@ EMAIL_HOST_USER = os.environ["MAILGUN_HOST_USER"]
 EMAIL_HOST_PASSWORD = os.environ["MAILGUN_HOST_PASSWORD"]
 EMAIL_PORT = int(os.environ["MAILGUN_PORT"])
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = 'futureself@service.com'
+DEFAULT_FROM_EMAIL = os.environ["FROM_EMAIL"]
 
 # Login settings
 LOGIN_REDIRECT_URL = 'letter:my_letters'
 LOGOUT_REDIRECT_URL = 'letter:home'
+
+
+# Celery settings
+CELERY_RESULT_BACKEND = 'django-db'
+CELERY_CACHE_BACKEND = 'django-cache'
+CELERY_RESULT_EXTENDED = True

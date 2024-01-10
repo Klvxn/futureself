@@ -18,7 +18,7 @@
   {% for blog in blogs_list %}
     <div class="col my-5 mx-ato">
       <div class="d-flex">
-        <img src="{{ blog.image.url }}" alt="" class="flex-start rounded" width="190" height="210">
+        <img src="{{ blog.image.url }}" alt="" class="flex-start rounded-4" width="190" height="190">
         <div class="flex-end px-3" style="width: calc(100% - 190px);">
           <a href="{{ blog.get_absolute_url }}"> <h5>{{ blog|title }}</h5></a> 
           <p>{{ blog.content|truncatewords:30 }}</p>

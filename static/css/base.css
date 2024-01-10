@@ -137,18 +137,20 @@ input:focus, textarea:focus, select:focus {
     width: 73%;
 }
 
-.flex-2 {
+.flex-1 {
     width: 50%;
 }
 
-.flex-2 input, .flex-2 select, .flex-2 button  {
-    width: 60% ;
+.flex-2 {
+    width: 50%;
+    text-align: center;
+}
+
+.flex-2 input, .flex-2 button {
+    width: 60%;
 }
 
 .flex-2 div {
-    margin-bottom: 4rem ;
-}
-
-input::placeholder, textarea::placeholder {
-    color: beige;
+    margin-bottom: 3rem;
+    width: 100%;
 }

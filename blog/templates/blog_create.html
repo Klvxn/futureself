@@ -40,7 +40,7 @@
     </div>
     <div class="my-5">
       <label for="content">Content</label><br>
-      <textarea name="content" id="content" cols="63" rows="13"></textarea>
+      {{ form.content }}
       <span class="error">{{ form.content.errors }}</span>
     </div>
     <button class="btn btn-primary w-50 my-5">Submit For Review</button>

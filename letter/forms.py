@@ -3,6 +3,8 @@ from datetime import timedelta
 from django import forms
 from django.utils import timezone
 
+from tinymce.widgets import TinyMCE
+
 from .models import Letter
 
 
@@ -18,6 +20,7 @@ class LetterForm(forms.ModelForm):
             'delivery_date',
             'audience'
         )
+        widgets = {'content': TinyMCE(attrs={'cols': 80, 'rows': 30})}
        
     def clean_content(self):
         letter_content = self.cleaned_data['content']

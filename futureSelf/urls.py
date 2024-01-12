@@ -23,6 +23,7 @@ urlpatterns = [
     path('', include('letter.urls')),
     path('accounts/', include('account.urls')),
     path('blogs/', include('blog.urls')),
+    path('tinymce/', include('tinymce.urls')),
 ]
 
 admin.site.site_header = 'Future Self Admin Portal'

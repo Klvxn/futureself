@@ -51,7 +51,8 @@ INSTALLED_APPS = [
 
     # Other apps
     'django_htmx',
-    'django_celery_results'
+    'django_celery_results',
+    'tinymce'
 ]
 
 MIDDLEWARE = [
@@ -176,3 +177,20 @@ LOGOUT_REDIRECT_URL = 'letter:home'
 CELERY_RESULT_BACKEND = 'django-db'
 CELERY_CACHE_BACKEND = 'django-cache'
 CELERY_RESULT_EXTENDED = True
+
+
+# TinyMCE settings
+TINYMCE_DEFAULT_CONFIG = {
+    "height": "560px",
+    "width": "800px",
+    "menubar": "file edit view insert format tools help",
+    "plugins": "advlist autolink lists link image charmap print preview anchor searchreplace visualblocks code "
+    "fullscreen insertdatetime media paste code help wordcount spellchecker",
+    "toolbar": "undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft "
+    "aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist | forecolor "
+    "backcolor casechange permanentpen formatpainter removeformat | pagebreak | charmap emoticons | "
+    "fullscreen  preview save print | insertfile image media pageembed template link anchor codesample | "
+    "a11ycheck ltr rtl | showcomments addcomment code",
+    "custom_undo_redo_levels": 10,
+}
+TINYMCE_SPELLCHECKER = True

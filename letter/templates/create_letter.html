@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 
-
 {% block content %}
 {% if messages %}
   {% for message in messages %}
@@ -12,14 +11,14 @@
         <span>{{ message }}  😊 </span>
         <button type="button" class="btn-close float-end" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
-      {% elif message.tags == "error" %}
-        <div class="alert alert-danger alert-dismissble fade show w-50 d-flex align-items-center" role="alert">
-          <svg xmlns="http://www.w3.org/2000/svg" weight="18" height="18" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">
-            <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-          </svg>
-          <span>{{ message }} 🤕</span>
-          <button type="button" class="btn-close me-auto" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
+    {% elif message.tags == "error" %}
+      <div class="alert alert-danger alert-dismissble fade show w-50 d-flex align-items-center" role="alert">
+        <svg xmlns="http://www.w3.org/2000/svg" weight="18" height="18" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">
+          <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+        </svg>
+        <span>{{ message }} 🤕</span>
+        <button type="button" class="btn-close me-auto" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
     {% endif %}
   {% endfor %}
 {% endif %}
@@ -28,29 +27,27 @@
   <form action="" method="post" class="form-group-lg">
      {{ form.non_field_errors }}
     {% csrf_token %}
-    <div class="d-flex">
-      <div class="flex-1">
-        <div>
-          <label for="title">Title</label><br>
-          <textarea name="title" id="title" cols="60" rows="2" placeholder="Title of your letter"></textarea>
-          <span class="error">{{ form.title.errors }}</span>
-        </div>
-
-        <div>
-          <label for="content">Content</label><br>
-          <textarea name="content" id="content" cols="60" rows="13">Dear Futureself, &NewLine;</textarea>
-          <span class="error">{{ form.content.errors }}</span>
-        </div>
+    <div>
+      <label for="title"></label><br>
+      <textarea name="title" id="title" cols="40" rows="2" placeholder="Subject of your letter"></textarea>
+      <span class="error">{{ form.title.errors }}</span>
+    </div>
+    <div class="d-flex justify-content-between">
+      <div class="flex-grow-2">
+        <label for="content"></label><br>
+        {{ form.content }}
+        <span class="error">{{ form.content.errors }}</span>
       </div>
 
-      <div class="flex-2">
-        <div>
-          <label for="email">Email address</label><br>
-          <input type="email" name="email_address" id="email_address" placeholder="name@example.com" size="flex-input">
+      <div class="float float-start">
+        <div class="mb-5">
+          <label for="email"></label><br>
+          
+          <input type="email" name="email_address" id="email_address" placeholder="Email address" size="flex-input">
           <span class="error">{{ form.email_address.errors }}</span>
         </div>
 
-        <div>
+        <div class="mb-5">
           <label for="delivery_date">When to deliver</label><br>
           <input type="date" name="delivery_date" id="delivery_date" class="flex-input"><br>
           {% if form.delivery_date.errors %}
@@ -60,7 +57,7 @@
           {% endif %}
         </div>
 
-        <div>
+        <div class="mb-5">
           <label for="audience">Choose your audience</label><br>
           <span>
             <input type="radio" class="btn-check" name="audience" id="private" value="private" autocomplete="off">

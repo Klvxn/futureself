@@ -3,8 +3,8 @@
 
 {% block content %}
 {% if messages %}
-  <div class="alert alert-success alert-dismissble fade show w-25" role="alert">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check-circle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Success:">
+  <div class="alert alert-success alert-dismissble fade show w-25 d-flex align-items-center" role="alert">
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-check-circle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Success:">
       <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
     </svg>
     {% for message in messages %}
@@ -32,13 +32,13 @@
         <div class="my-5">
           <h4>Audience</h4>
           {% if letter.audience == "private" %}
-            Currently set to: <span class="badge bg-info p-1">{{ letter.audience }} </span> <br>
-            <span>Only you would be able to see this email. </span><br>
-            <p>Change audience to: <button class="btn btn-outline-secondary" hx-post="{% url 'letter:update_letter' letter.id %}">Public</button> </p>
+            <p> Currently set to: <span class="audience badge bg-info">{{ letter.audience|capfirst }} </span> <br>
+            <span>Only you would be able to see this email. </span> <br>
+            <span>Change audience to: <button class="btn btn-outline-secondary btn-sm" hx-post="{% url 'letter:update_letter' letter.id %}">Public</button> </span> </p>
           {% else %}
-            <p> Currently set to: <span class="badge bg-secondary p-2">{{ letter.audience }} </span> <p>
-            <span>Other users will be able to see the content of this letter but your email address won't be visible to the public. </span>
-            <p>Change audience to:  &ThickSpace;<button class="btn btn-outline-info p-1" hx-post="{% url 'letter:update_letter' letter.id %}">🔐 Private</button> </p>
+            <p> Currently set to: <span class="audience badge bg-secondary">{{ letter.audience|capfirst }} </span> <br>
+            <span>Other users will be able to see the content of this letter but your email address won't be visible to the public. </span> <br>
+            <span>Change audience to:  &ThickSpace;<button class="btn btn-outline-info btn-sm" hx-post="{% url 'letter:update_letter' letter.id %}">🔐 Private</button> </span> </p>
           {% endif %}
         </div>
         <div class="my-5">

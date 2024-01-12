@@ -41,9 +41,9 @@
         </div>
           <div class="float-end">
             {% if t_letter.audience == "private" %}
-              <span class="audience badge bg-info p-2">{{ t_letter.audience }}</span>
+              <span class="audience badge bg-info small">{{ t_letter.audience|capfirst }}</span>
             {% else %}
-              <span class="audience badge bg-warning p-2">{{ t_letter.audience }}</span>
+              <span class="audience badge bg-secondary small">{{ t_letter.audience|capfirst }}</span>
             {% endif %}
           </div>
         </p>
@@ -62,15 +62,15 @@
         <p> {{ letter.content|truncatewords:30|safe }} </p>
         <hr>
         <p>
-          <div class="float-start">{{ letter.date_posted.date }} &rightarrow; {{ letter.delivery_date }}</div>
+          <div class="float-start small">{{ letter.date_posted.date }} &rightarrow; {{ letter.delivery_date }}</div>
           <div class="float-end">
             {% if letter.audience == "private" %}
-              <span class="audience badge bg-info p-2">{{ letter.audience }}</span>
+              <span class="audience badge bg-info small">{{ letter.audience|capfirst }}</span>
             {% else %}
-              <span class="audience badge bg-warning p-2">{{ letter.audience }}</span>
+              <span class="audience badge bg-secondary small">{{ letter.audience|capfirst }}</span>
             {% endif %}
           </div>
-        </p> <br> <br>
+        </p> <br>
         <div class="text-muted small">🚀 Time travelled: {{ letter.date_posted|timesince:letter.delivery_date }}</div>
       </div>
       {% empty %}

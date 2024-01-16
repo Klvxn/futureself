@@ -65,10 +65,23 @@ p, .heading {
     color: darkgray;
 }
 
-input, select, textarea {
-    border-radius: .3rem;
-    border: .1rem lightgray solid;
+input, textarea {
+    border: .12rem lightgray solid;
     padding: .5rem;
+    border-top: 0;
+    border-right: 0;
+    border-left: 0;
+}
+
+input::placeholder, textarea::placeholder {
+    color: lightgray;
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    border-left: 2px solid #0d6efd;
+    border-bottom: 2px solid #0d6efd;
+    border-left: 0;
 }
 
 #home-form {
@@ -76,11 +89,25 @@ input, select, textarea {
 }
 
 .form-group-lg div {
-    margin: 1.5rem 0rem ;
+    margin: 1rem 0rem ;
 }
 
-#title {
-    resize: none;
+form button {
+    width: 30%;
+}
+
+.input-group {
+    width: 40% ;
+    justify-self: center;
+}
+
+.input-group input {
+    width: 50% !important;
+}
+
+.input-group input:focus {
+    text-align: center;
+    box-shadow: none;
 }
 
 #letters {
@@ -101,17 +128,12 @@ input, select, textarea {
     padding: 2rem;
 }
 
-.user_form input, .user_form button{
+.user_form input {
     width: 25%;
 }
 
 .user_form input {
     padding: 5px;
-}
-
-input:focus, textarea:focus, select:focus {
-    outline-width: 1px;
-    outline-color: skyblue;
 }
 
 .blur {
@@ -121,7 +143,7 @@ input:focus, textarea:focus, select:focus {
 }
 
 .help_text, .error {
-    font-size: .85rem;
+    font-size: .82rem;
 }
 
 .error {
@@ -129,28 +151,14 @@ input:focus, textarea:focus, select:focus {
     list-style-type: none;
 }
 
-.help_text {
-    color: gray;
-}
-
 #home-form .sm-input {
     width: 73%;
 }
 
-.flex-1 {
-    width: 50%;
+.audience {
+    border-radius: 0;
 }
 
-.flex-2 {
-    width: 50%;
-    text-align: center;
-}
-
-.flex-2 input, .flex-2 button {
-    width: 60%;
-}
-
-.flex-2 div {
-    margin-bottom: 3rem;
-    width: 100%;
+button, .btn {
+    border-radius: .3rem !important;
 }

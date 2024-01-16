@@ -6,18 +6,18 @@
     <form action="" method="post" class="form-group-lg">
       {% csrf_token %}
       {{ form.non_field_errors }}
-      <div>
-        <label for="username">Username</label><br>
-        <input type="text" name="username" id="username">
+      <div class="input-group mx-auto justify-content-center">
+        <span class="input-group-text w-25">Username</span>
+        <input type="text" name="username" id="username" class="border-start">
         <span class="error">{{ form.username.errors }}</span>
       </div>
-      <div>
-        <label for="password">Password</label><br>
-        <input type="password" name="password" id="password">
+      <div class="input-group mx-auto justify-content-center">
+        <span class="input-group-text w-25 text-center">Password</span>
+        <input type="password" name="password" id="password" class="border-start">
         <span class="error">{{ form.password.errors }}</span>
       </div>
       <p><a href="">Forgot password?</a></p>
-      <button class="btn btn-primary m-3 px-4">Log In</button>
+      <button type="submit" class="btn btn-primary mt-5">Log In</button>
       <hr class="mx-5 my-3">
       <p>Don't have an account? <a href="{% url 'account:signup' %}">Sign up</a></p>
     </form>

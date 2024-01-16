@@ -6,30 +6,27 @@
     <form action="" method="post" class="form-group-lg">
       {% csrf_token %}
       {{ form.non_field_errors }}
-      <div>
-        <label for="username">Username</label><br>
-        <input type="text" name="username" id="username" autofocus >
+      <div class="input-group mx-auto justify-content-center">
+        <span class="input-group-text w-25">Username</span>
+        <input type="text" name="username" id="username" class="border-start">
         <span class="error">{{ form.username.errors }}</span>
       </div>
-    
-      <div>
-        <label for="email">Email Address</label><br>
-        <input type="email" name="email" id="email" >
+      <div class="input-group mx-auto justify-content-center">
+        <span class="input-group-text w-25">Email Address</span>
+        <input type="email" name="email" id="email" class="border-start">
         <span class="error">{{ form.email.errors }}</span>
       </div>
-
-      <div>
-        <label for="password1">Password</label><br>
-        <input type="password" name="password1" id="password1" autocomplete="new-password">
+      <div class="input-group mx-auto justify-content-center">
+        <span class="input-group-text w-25">Password</span>
+        <input type="password" name="password1" id="password1" autocomplete="new-password" class="border-start">
         <span class="error">{{ form.password1.errors }}</span>
       </div>
-
-      <div>
-        <label for="password2">Confirm Password</label><br>
-        <input type="password" name="password2" id="password2" autocomplete="new-password" >
+      <div class="input-group mx-auto justify-content-center">
+        <span class="input-group-text w-25">Re-password</span>
+        <input type="password" name="password2" id="password2" autocomplete="new-password" class="border-start">
         <span class="error">{{ form.password2.errors }}</span>
       </div>
-      <button class="btn btn-primary m-3 px-4">Sign Up</button>
+      <button type="submit" class="btn btn-primary mt-5">Sign Up</button>
       <hr class="my-3 mx-5">
       <p>Already have an account? <a href="{% url 'account:login' %}">Login</a></p>
     </form>

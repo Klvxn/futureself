@@ -11,5 +11,5 @@ urlpatterns = [
     path('letters/<uuid:pk>/', LetterDetailView.as_view(), name='letter_detail'),
     path('letters/create/', LetterCreateView.as_view(), name='create_letter'),
     path('letters/<uuid:pk>/update/', update_letter, name='update_letter'),
-    path('letters/public-audience/', PublicLettersView.as_view(), name='public_letters'),
+    path('letters/audience/public/', PublicLettersView.as_view(), name='public_letters'),
 ]

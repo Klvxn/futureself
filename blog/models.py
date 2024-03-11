@@ -11,9 +11,9 @@ class Blog(models.Model):
         PENDING = 'under review'
         PUBLISHED = 'published'
 
-    title = models.CharField(max_length=50, unique=True)
+    title = models.CharField(max_length=100, unique=True)
     content = models.TextField()
-    slug = models.SlugField(unique=True)
+    slug = models.SlugField(unique=True, max_length=100)
     writer = models.ForeignKey(User, on_delete=models.CASCADE)
     date_posted = models.DateTimeField(auto_now_add=True)
     image = models.ImageField(upload_to="blog/")

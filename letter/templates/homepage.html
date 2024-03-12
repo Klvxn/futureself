@@ -31,48 +31,11 @@
           <li>Acknowledging self-growth and achievements</li>
         </ul>
     </div>
-
   </div>
   <div class="form" id="home-form">
     <form action="" method="post" class="form-group-lg">
       {{ form.non_field_errors }}
       {% csrf_token %}
-      <div>
-        <label for="title">Title</label><br>
-        <textarea name="title" id="title" cols="40" rows="2" placeholder="Title of your letter"></textarea>
-        <span class="error">{{ form.title.errors }}</span>
-      </div>
-    
-      <div>
-        <label for="content">Content</label><br>
-        <textarea name="content" id="content" cols="40" rows="13">Dear Futureself, &NewLine; </textarea>
-        <span class="error">{{ form.content.errors }}</span>
-      </div>
-      
-      <div>
-        <label for="email">Email Address</label><br>
-        <input type="email" name="email_address" id="email_address" placeholder="name@example.com" class="sm-input">
-        <span class="help_text text-danger">{{ form.email_address.errors }}</span>
-      </div>
-
-      <div>
-        <label for="delivery_date">When to deliver</label><br>
-        <input type="date" name="delivery_date" id="delivery_date" class="sm-input"><br>
-        {% if form.delivery_date.errors %}
-          <span class="help_text text-danger">{{ form.delivery_date.errors }}</span>
-        {% else %}
-            <span class="help_text">&#9888; Date must be at least a month from now</span>
-        {% endif %}
-      </div>
-
-      <div>
-        {{ form.audience.errors }}
-        <label for="audience">Audience</label><br>
-        <select name="audience" id="audience" class="sm-input">
-          <option value="private">Private</option>
-          <option value="public, but as anon">Public, but anonymous</option>
-        </select>
-      </div>
       <button class="btn btn-primary m-3 sm-input">🛫 Send to the Future</button>
     </form>
   </div>

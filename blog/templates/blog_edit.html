@@ -8,19 +8,19 @@
     {% csrf_token %}
     {{ form.non_field_errors }}
     <div>
-      {{ form.title.errors }}
-      <label for="title">Title</label><br>
-      <textarea name="title" id="title" cols="63" rows="2" maxlength="50">{{ form.title.value }}</textarea>
+      <label for="title"></label><br>
+      <input name="title" id="title" type="text" value="{{ form.title.value }}" class="w-50" aria-autocomplete="off" placeholder="Title of your article?">
+      <span class="error">{{ form.title.errors }}</span>
     </div>
     <div class="my-5">
-      <label for="image">Image</label><br>
+      <label for="image"></label><br>
       {{ form.image }}
       <span class="error">{{ form.image.errors }}</span>
     </div>
     <div>
       {{ form.content.errors }}
-      <label for="content">Content</label><br>
-      <textarea name="content" id="content" cols="63" rows="13">{{ form.content.value }}</textarea>
+      <label for="content"></label><br>
+      {{ form.content }}
     </div>
     <button class="btn btn-primary w-50">Submit</button>
   </form>

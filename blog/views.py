@@ -41,15 +41,15 @@ class BlogCreateView(LoginRequiredMixin, CreateView):
     form_class = BlogForm
     success_url = reverse_lazy('blog:blog_create')
     template_name = 'blog_create.html'
-
+    
     def form_invalid(self, form):
-        messages.error(self.request, 'Error in submitting blog.')
+        messages.error(self.request, 'Error in submitting blog')
         return super().form_invalid(form)
 
     def form_valid(self, form):
         form.instance.writer = self.request.user
         form.instance.slug = slugify(form.instance.title)
-        messages.success(self.request, 'Your post has been submitted for review.')
+        messages.success(self.request, 'Your post has been submitted for review')
         return super().form_valid(form)
 
 

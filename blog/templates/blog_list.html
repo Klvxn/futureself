@@ -4,27 +4,33 @@
 {% block content %}
 <div class="width">
   {% if messages %}
-  <div class="alert alert-success alert-dismissble fade show w-50" role="alert">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check-circle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Success:">
+  <div class="alert alert-success alert-dismissble d-flex align-items-center fade show w-50" role="alert">
+    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" class="bi bi-check-circle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Success:">
       <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
     </svg>
     {% for message in messages %}
       {{ message }}  👍
     {% endfor %}
-    <button type="button" class="btn-close float-end" data-bs-dismiss="alert" aria-label="Close"></button>
+    <button type="button" class="btn-close ms-auto float-end" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
   {% endif %}
   <h3 class="heading">Our Blog</h3>
   {% for blog in blogs_list %}
     <div class="col my-5 mx-ato">
-      <div class="d-flex">
+      <div class="d-flex hover p-3">
         <img src="{{ blog.image.url }}" alt="" class="flex-start rounded-4" width="190" height="190">
         <div class="flex-end px-3" style="width: calc(100% - 190px);">
           <a href="{{ blog.get_absolute_url }}"> <h5>{{ blog|title }}</h5></a> 
-          <p>{{ blog.content|truncatewords:30 }}</p>
+          <p>{{ blog.content|truncatewords:30|safe }}</p>
           <div id="writer">
-            <hr>
-            <span class="small">{{ blog.writer.first_name }} {{ blog.writer.last_name }}</span><br>
+            <hr class="mb-0">
+            <span class="small">
+              {% if blog.writer.first_name %}
+                {{ blog.writer.first_name }} {{ blog.writer.last_name }}
+              {% else %}
+                {{ blog.writer.username }}
+              {% endif %}
+            </span><br>
             <span class="small">{{ blog.date_posted.date }}</span>
           </div>
         </div>

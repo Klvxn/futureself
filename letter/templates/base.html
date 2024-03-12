@@ -34,10 +34,10 @@
                 </button>
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item" href="{% url 'letter:my_letters' %}">✉️ My Letters</a></li>
-                  <li><a class="dropdown-item" href="{% url 'blog:blog_create' %}">📝 Add Blog</a></li>
+                  <li><a class="dropdown-item" href="{% url 'blog:blog_create' %}">📝 Write a Blog?</a></li>
                   <li><a class="dropdown-item" href="{% url 'account:manage_account' %}">👤 Manage Account</a></li>
                   <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="{% url 'account:logout' %}">Log out</a></li>
+                  <li><a class="dropdown-item" hx-post="{% url 'account:logout' %}" href="{% url 'account:logout' %}">Log out</a></li>
                 </ul>
               </div>
             </li>

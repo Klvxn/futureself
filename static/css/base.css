@@ -65,7 +65,7 @@ p, .heading {
     color: darkgray;
 }
 
-input, textarea {
+input {
     border: .12rem lightgray solid;
     padding: .5rem;
     border-top: 0;
@@ -73,15 +73,15 @@ input, textarea {
     border-left: 0;
 }
 
-input::placeholder, textarea::placeholder {
+input::placeholder {
     color: lightgray;
 }
 
-input:focus, textarea:focus {
+input:focus {
     outline: none;
-    border-left: 2px solid #0d6efd;
     border-bottom: 2px solid #0d6efd;
     border-left: 0;
+    background-color: lightgray;
 }
 
 #home-form {

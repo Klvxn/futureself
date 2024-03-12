@@ -1,4 +1,8 @@
 from django.contrib import admin
+from django.db import models
+
+from tinymce.widgets import TinyMCE
+
 from .models import Letter
 
 
@@ -8,6 +12,9 @@ class LetterAdmin(admin.ModelAdmin):
     list_display = ('user', 'title', 'email_address', 'delivered', 'audience')
     list_filter = ('audience',)
     actions = ['mark_delivered', 'set_audience_public', 'set_audience_private']
+    formfield_overrides = {
+        models.TextField: {'widget': TinyMCE()}
+    }
 
     @admin.action(description='Mark as delivered')
     def mark_delivered(self, request, queryset):

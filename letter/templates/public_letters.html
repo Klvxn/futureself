@@ -5,18 +5,57 @@
 <div class="container-fluid width">
   <h3 class="heading">Public Letters From The Past</h3>
   {% for letter in public_letters %}
-    <div class="px-4 pb-5 pt-3 my-5 hover">
-      <p class="text-center"><b> A LETTER FROM {{ letter.date_posted.date }} </b></p>
-      <p>
-        <a href="{{ letter.get_absolute_url }}"> {{ letter|upper }} </a> <br>
-        {{ letter.content|truncatewords:50 }}
-      </p>
-      <hr>
-      <div>
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">{{ letter|upper }}</h5>
+        <p class="card-text">{{ letter.content|truncatewords:30|safe }}</p>
+        <a href="{{ letter.get_absolute_url }}" class="btn btn-primary">Read More</a>
+      </div>
+      <div class="card-footer text-muted">
         <span class="text-muted small float-start">🚀 Time travelled: {{ letter.date_posted|timesince:letter.delivery_date }}</span>	
         <span class="audience badge bg-secondary small float-end">{{ letter.audience|capfirst }}</span>
       </div>
     </div>
   {% endfor %}
+
+  {% if is_paginated %}
+    <div class="pagination d-block">
+      <nav aria-label="Page navigation example" class="fst-italic">
+        <ul class="pagination">
+          {% if page_obj.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a></li>
+          {% else %}
+            <li class="page-item"><a href="?page={{ page_obj.paginator.num_pages }}" class="page-link">jump to last</a></li>
+          {% endif %}
+          {% for page in page_obj.paginator.page_range %}   
+            {% if page_obj.number == page %}    
+              <li class="page-item"><a class="page-link active" href="?page={{ page }}">{{ page }}</a></li>
+            {% endif %}
+          {% endfor %}
+          {% if page_obj.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a></li>
+          {% else %}
+            <li class="page-item"><a href="?page=1" class="page-link">jump to first</a></li>
+          {% endif %}
+        </ul>
+      </nav>
+      <div class="step-links">
+        <span class="text-muted">
+          page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+      </div>
+    </div>
+  {% endif %}
 </div>
 {% endblock content %}
+
+<div class="hover px-4 pb-5 pt-3 my-5">
+  <p class="text-center"><b> A LETTER FROM {{ letter.date_posted.date|safe }} </b></p>
+  <a href="{{ letter.get_absolute_url }}"> {{ letter|upper }} </a> <br>
+  <p>{{ letter.content|truncatewords:30 }}</p>
+  <hr>
+  <div>
+    <span class="text-muted small float-start">🚀 Time travelled: {{ letter.date_posted|timesince:letter.delivery_date }}</span>	
+    <span class="audience badge bg-secondary small float-end">{{ letter.audience|capfirst }}</span>
+  </div>
+</div>

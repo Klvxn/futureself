@@ -16,12 +16,12 @@
 <div class="width">
   <h3 class="heading">Our Blog</h3>
   {% for blog in blogs_list %}
-    <div class="col my-5 mx-ato">
-      <div class="d-flex hover p-3">
+    <div class="my-5">
+      <div class="d-flex p-3">
         <img src="{{ blog.image.url }}" alt="" class="flex-start rounded-4" width="190" height="190">
         <div class="flex-end px-3" style="width: calc(100% - 190px);">
           <a href="{{ blog.get_absolute_url }}"> <h5>{{ blog|title }}</h5></a> 
-          <p>{{ blog.content|truncatewords:30|safe }}</p>
+          <p>{{ blog.content|truncatewords:20|safe }}</p>
           <div id="writer">
             <hr class="mb-0">
             <span class="small">
@@ -37,5 +37,33 @@
       </div>
     </div>
   {% endfor %}
+  {% if is_paginated %}
+    <div class="pagination d-block">
+      <nav aria-label="Page navigation example" class="fst-italic">
+        <ul class="pagination">
+          {% if page_obj.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a></li>
+          {% else %}
+            <li class="page-item"><a href="?page={{ page_obj.paginator.num_pages }}" class="page-link">jump to last</a></li>
+          {% endif %}
+          {% for page in page_obj.paginator.page_range %}   
+            {% if page_obj.number == page %}    
+              <li class="page-item"><a class="page-link active" href="?page={{ page }}">{{ page }}</a></li>
+            {% endif %}
+          {% endfor %}
+          {% if page_obj.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a></li>
+          {% else %}
+            <li class="page-item"><a href="?page=1" class="page-link">jump to first</a></li>
+          {% endif %}
+        </ul>
+      </nav>
+      <div class="step-links">
+        <span class="text-muted">
+          page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+      </div>
+    </div>
+  {% endif %}
 </div>
 {% endblock content %}

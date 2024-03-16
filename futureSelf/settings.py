@@ -182,7 +182,7 @@ CELERY_RESULT_EXTENDED = True
 # TinyMCE settings
 TINYMCE_DEFAULT_CONFIG = {
     "height": "560px",
-    "width": "800px",
+    # "width": "760px",
     "menubar": "file edit view insert format tools help",
     "plugins": "advlist autolink lists link image charmap print preview anchor searchreplace visualblocks code "
     "fullscreen insertdatetime media paste code help wordcount spellchecker",

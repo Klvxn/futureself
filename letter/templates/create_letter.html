@@ -27,25 +27,25 @@
   <form action="" method="post" class="form-group-lg">
     {{ form.non_field_errors }}
     {% csrf_token %}
-    <div>
+    <div class="text-start ms-lg-5 w-auto">
       <label for="title"></label><br>
       <input name="title" id="title" placeholder="Subject of your letter" class="w-50" autocomplete="off">
       <span class="error">{{ form.title.errors }}</span>
     </div>
-    <div class="d-flex justify-content-between align-items-start">
-      <div class="flex-grow-1">
+    <div class="d-flex justify-content-evenly">
+      <div>
         <label for="content"></label><br>
         {{ form.content }}
         <span class="error">{{ form.content.errors }}</span>
       </div>
-      <div class="flex-grow-1 text-start">
+      <div class="text-start">
         <div class="mb-5">
           <label for="email"></label><br>
-          <input type="email" name="email_address" id="email_address" class="w-100" placeholder="Email address">
+          <input type="email" name="email_address" id="email_address" class="w-100" placeholder="Recipient email address">
           <span class="error">{{ form.email_address.errors }}</span>
         </div>
         <div class="mb-5">
-          <label for="delivery_date">When to deliver</label><br>
+          <label for="delivery_date"></label><br>
           <input type="date" name="delivery_date" id="delivery_date" class="w-100"><br>
           {% if form.delivery_date.errors %}
             <span class="error">{{ form.delivery_date.errors }}</span>
@@ -53,19 +53,18 @@
               <span class="help_text small text-muted">&#9888; Date must be at least a month from now</span>
           {% endif %}
         </div>
-
         <div class="mb-5">
           <label for="audience">Choose your audience</label><br>
-          <span>
+          <span class="radio">
             <input type="radio" class="btn-check" name="audience" id="private" value="private" autocomplete="off">
-            <label class="btn btn-outline-primary" for="private">Private</label>
+            <label class="btn btn-outline-primary btn-sm" for="private">Private</label>
           </span>
-          <span class="ms-4">
+          <span class="ms-4 radio">
             <input type="radio" class="btn-check" name="audience" id="public" autocomplete="off" value="public, but as anon">
-            <label class="btn btn-outline-primary btn-md" for="public">Public, but anonymous</label>
+            <label class="btn btn-outline-primary btn-sm" for="public">Public, but anonymous</label>
           </span>
         </div>
-        <button class="btn btn-primary w-100 p-2" type="submit">🛫 Send to the Future</button>
+        <button class="btn btn-primary w-100 p-2 create-btn" type="submit">🛫 Send to the Future</button>
       </div>  
     </div>
   </form>

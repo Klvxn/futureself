@@ -20,7 +20,7 @@ class LetterForm(forms.ModelForm):
             'delivery_date',
             'audience'
         )
-        widgets = {'content': TinyMCE(attrs={'cols': 80, 'rows': 30})}
+        widgets = {'content': TinyMCE(attrs={'cols':75, 'rows': 30})}
        
     def clean_content(self):
         letter_content = self.cleaned_data['content']

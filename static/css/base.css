@@ -162,3 +162,30 @@ form button {
 button, .btn {
     border-radius: .3rem !important;
 }
+
+div.pagination {
+    margin-top: 10rem;
+    margin-bottom: 5rem;
+    font-size: normal;
+}
+
+div.pagination a {
+    font-size: small;
+}
+
+.blog-txtarea .tox.tox-tinymce {
+    margin: 0 auto;
+    width: 840px;
+}
+
+.tox.tox-tinymce {
+    width: 720px;
+}
+
+.create-btn {
+    margin-top: 11.6rem;
+}
+
+.text-start {
+    width: 30%;
+}

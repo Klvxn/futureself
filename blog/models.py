@@ -16,8 +16,9 @@ class Blog(models.Model):
     slug = models.SlugField(unique=True, max_length=100)
     writer = models.ForeignKey(User, on_delete=models.CASCADE)
     date_posted = models.DateTimeField(auto_now_add=True)
-    image = models.ImageField(upload_to="blog/")
+    image = models.ImageField(upload_to='blog/')
     status = models.CharField(max_length=15, choices=Status.choices, default=Status.PENDING)
+    liked_by = models.ManyToManyField(User, related_name='likes')
 
     class Meta:
         ordering = ('-date_posted',)

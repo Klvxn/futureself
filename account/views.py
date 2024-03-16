@@ -40,7 +40,7 @@ class LogoutView(Logout):
     success_url = reverse_lazy('letter:home')
     
     def dispatch(self, request, *args,**kwargs):
-        messages.info(request, 'You\'ve been logged out.')
+        messages.info(request, 'You\'ve been logged out!')
         return super().dispatch(request, *args, **kwargs)
 
 
@@ -63,7 +63,7 @@ class ManageAccountView(LoginRequiredMixin, View):
             form.save()
             messages.success(request, 'Changes saved!')
             return redirect(reverse('account:manage_account'))
-        messages.error(request, "Error saving changes.")
+        messages.error(request, 'Error saving changes!')
         return render(request, self.template_name, context)
 
 

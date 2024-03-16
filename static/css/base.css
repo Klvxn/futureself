@@ -1,11 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Miriam+Libre:wght@400;700&family=Space+Grotesk&display=swap');
 
 body {
     margin: 0;
     padding: 0;
 }
 
-ul.nav-item, .home {
+ul.nav-item {
     display: flex;
 }
 
@@ -35,6 +36,12 @@ li.nav-item {
     margin: 2rem auto;
 }
 
+blockquote, .home {
+    font-family: "Miriam Libre", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
 .letter-heading, h4, h5 {
     font-family: 'Lato', sans-serif;
     font-weight: lighter;
@@ -48,7 +55,7 @@ a {
     text-decoration: none;
 }
 
-p, .heading {
+p {
     line-height: 2;
 }
 
@@ -84,8 +91,8 @@ input:focus {
     background-color: lightgray;
 }
 
-#home-form {
-    width: 100%;
+.home-note {
+    width: 60%;
 }
 
 .form-group-lg div {
@@ -124,9 +131,7 @@ form button {
     color: rgb(13 110 253);
 }
 
-.home {
-    padding: 2rem;
-}
+
 
 .user_form input {
     width: 25%;

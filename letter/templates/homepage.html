@@ -13,31 +13,34 @@
     <button type="button" class="btn-close ms-auto float-end" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
 {% endif %}
-<div class="home">
+<div class="home d-flex justify-content-evenly">
   <div class="home-note">
-    <h2 class="heading text-start mt-3"> Write a Letter to Your Future Self</h2>
+    <h2 class="heading text-start mt-3 mb-5"> Welcome to Futureself 🔮 </h2>
     <p> 
-      <blockquote class="text-muted">
+      <blockquote class="fs-5">
+        <span class="h4 fst-italic">S</span>tart a journey of self-discovery and reflection by sending messages to the you of tomorrow.
+        Reflect on your present, set goals, and capture memories - all to be unwrapped in the future. 
+        Let your future self be inspired by the who you are today. <br> <br>
+      </blockquote>
+      <blockquote class="text-muted fst-italic">
         "I love this. I've sent myself 5 letters so far and every year it's a surprise. Because I forget so easily. It turns into such a deep reflective process, that I usually weep and laugh while I write."
       </blockquote>
       - Mona Lisa <br>
       Member since 2022
     </p>
-    <div class="my-5">
+    <div class="my-4">
         Futureself letters are good for
         <ul>
           <li>Setting future goals</li>
           <li>Reliving memories</li>
           <li>Acknowledging self-growth and achievements</li>
         </ul>
+        <p class="fst-italic fs-5">Allow us be your personal time capsule, helping you connect with your past and future ⌛</p>
     </div>
   </div>
-  <div class="form" id="home-form">
-    <form action="" method="post" class="form-group-lg">
-      {{ form.non_field_errors }}
-      {% csrf_token %}
-      <button class="btn btn-primary m-3 sm-input">🛫 Send to the Future</button>
-    </form>
+  <div class="align-self-center home-img text-center mt-5">
+    <img src="/static/images/_c451e483-d872-4870-9877-8637eb489b74.jpeg" alt="Letter in motion" width="360" class="img-fluid mt-lg-2">
+    <a class="btn btn-outline-primary m-3 sm-input" href='{% url "letter:create_letter" %}'>Take me to the Future</a>
   </div>
 </div>
 {% endblock content %}

@@ -13,5 +13,9 @@ venv
 staticfiles
 media
 
+# Database
 db.sqlite3
+migrations
+
+
 .dockerignore

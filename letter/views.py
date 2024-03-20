@@ -53,7 +53,7 @@ class LetterDetailView(DeletionMixin, DetailView):
 
 @login_required
 @require_http_methods(["POST", "PUT"])
-def update_letter(request, pk):
+def update_letter_audience(request, pk):
     letter = get_object_or_404(Letter, id=pk, user=request.user)
     if letter.user != request.user:
         return HttpResponseForbidden
@@ -73,12 +73,12 @@ class LetterCreateView(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy('letter:create_letter')
 
     def form_invalid(self, form):
-        messages.error(self.request, 'Error creating new letter.')
+        messages.error(self.request, 'Error creating new letter!')
         return super().form_invalid(form)
 
     def form_valid(self, form):
         form.instance.user = self.request.user
-        messages.success(self.request, "Letter submitted sucessfully.")
+        messages.success(self.request, "Letter submitted sucessfully!")
         return super().form_valid(form)
 
 
@@ -87,3 +87,5 @@ class PublicLettersView(ListView):
     context_object_name = 'public_letters'
     template_name = 'public_letters.html'
     queryset = Letter.objects.filter(audience='public, but as anon', delivered=True)
+    paginate_by = 3
+    

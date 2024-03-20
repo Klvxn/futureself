@@ -8,6 +8,8 @@ from django.utils.decorators import method_decorator
 from django.views.generic import ListView, UpdateView, CreateView, DetailView
 from django.views.generic.edit import DeletionMixin
 
+from django_htmx.http import HttpResponseLocation
+
 from .models import Blog
 from .forms import BlogForm
 
@@ -18,6 +20,7 @@ class BlogListView(ListView):
     template_name = 'blog_list.html'
     queryset = Blog.objects.filter(status='published')
     context_object_name = 'blogs_list'
+    paginate_by = 2
 
 
 class BlogDetailView(DeletionMixin, DetailView):
@@ -29,7 +32,8 @@ class BlogDetailView(DeletionMixin, DetailView):
 
     @method_decorator(login_required)
     def post(self, request, *args, **kwargs):
-        if request.user != self.get_object().writer:
+        obj = self.get_object()
+        if request.user != obj.writer:
             return HttpResponseForbidden()
         messages.success(request, 'Your blog has been deleted!')
         return super().post(request, *args, **kwargs)
@@ -43,14 +47,25 @@ class BlogCreateView(LoginRequiredMixin, CreateView):
     template_name = 'blog_create.html'
     
     def form_invalid(self, form):
-        messages.error(self.request, 'Error in submitting blog')
+        messages.error(self.request, 'Error in submitting blog!')
         return super().form_invalid(form)
 
     def form_valid(self, form):
         form.instance.writer = self.request.user
         form.instance.slug = slugify(form.instance.title)
-        messages.success(self.request, 'Your post has been submitted for review')
+        messages.success(self.request, 'Your post has been submitted for review!')
         return super().form_valid(form)
+    
+
+@login_required
+def update_like(request, slug):
+    blog = Blog.objects.get(slug=slug)
+    if request.user in blog.liked_by.all():
+        blog.liked_by.remove(request.user)
+    else:
+        blog.liked_by.add(request.user)
+    blog.save()
+    return HttpResponseLocation(blog.get_absolute_url())
 
 
 class BlogEditView(LoginRequiredMixin, UpdateView):
@@ -60,12 +75,14 @@ class BlogEditView(LoginRequiredMixin, UpdateView):
     template_name = 'blog_edit.html'
 
     def get(self, request, *args, **kwargs):
-        if request.user != self.get_object().writer:
+        obj = self.get_object()
+        if request.user != obj.writer:
             return HttpResponseForbidden()
         return super().get(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
-        if request.user != self.get_object().writer:
+        obj = self.get_object()
+        if request.user != obj.writer:
             return HttpResponseForbidden()
         return super().post(request, *args, **kwargs)
 
@@ -75,4 +92,5 @@ class BlogEditView(LoginRequiredMixin, UpdateView):
         return super().form_valid(form)
     
     def get_success_url(self):
-        return self.get_object().get_absolute_url()
+        obj = self.get_object()
+        return obj.get_absolute_url()

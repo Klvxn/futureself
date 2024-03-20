@@ -56,23 +56,23 @@
 
     <div class="my-5 px-4 tab-pane fade" id="pills-delivered" role="tabpanel" aria-labelledby="pills-delivered-tab">
       {% for letter in delivered_letters %}
-      <div class="hover p-4 my-5">
-        <p class="text-center"><b> A LETTER FROM {{ letter.date_posted.date }} </b></p>
-        <a href="{{ letter.get_absolute_url }}" class="text-center">{{ letter.title|upper }}</a><br>
-        <p> {{ letter.content|truncatewords:30 }} </p>
-        <hr>
-        <p>
-          <div class="float-start small">{{ letter.date_posted.date }} &rightarrow; {{ letter.delivery_date }}</div>
-          <div class="float-end">
-            {% if letter.audience == "private" %}
-              <span class="audience badge bg-info small">{{ letter.audience|capfirst }}</span>
-            {% else %}
-              <span class="audience badge bg-secondary small">{{ letter.audience|capfirst }}</span>
-            {% endif %}
-          </div>
-        </p> <br>
-        <div class="text-muted small">🚀 Time travelled: {{ letter.date_posted|timesince:letter.delivery_date }}</div>
-      </div>
+        <div class="hover p-4 my-5">
+          <p class="text-center"><b> A LETTER FROM {{ letter.date_posted.date }} </b></p>
+          <a href="{{ letter.get_absolute_url }}" class="text-center">{{ letter.title|upper }}</a><br>
+          {{ letter.content|safe|truncatewords:20 }}
+          <hr>
+          <p>
+            <div class="float-start small">{{ letter.date_posted.date }} &rightarrow; {{ letter.delivery_date }}</div>
+            <div class="float-end">
+              {% if letter.audience == "private" %}
+                <span class="audience badge bg-info small">{{ letter.audience|capfirst }}</span>
+              {% else %}
+                <span class="audience badge bg-secondary small">{{ letter.audience|capfirst }}</span>
+              {% endif %}
+            </div>
+          </p> <br>
+          <div class="text-muted small">🚀 Time travelled: {{ letter.date_posted|timesince:letter.delivery_date }}</div>
+        </div>
       {% empty %}
         <h4> 📭 No letters delivered yet. But when they arrive from the past, they will be available here.</h4>
       {% endfor %}

@@ -42,6 +42,10 @@ blockquote, .home {
     font-style: normal;
 }
 
+button {
+    font-family: 'Miriam Libre', sans-serif ;
+}
+
 .letter-heading, h4, h5 {
     font-family: 'Lato', sans-serif;
     font-weight: lighter;
@@ -86,9 +90,9 @@ input::placeholder {
 
 input:focus {
     outline: none;
-    border-bottom: 2px solid #0d6efd;
+    border-bottom: 1px solid #0d6efd;
     border-left: 0;
-    background-color: lightgray;
+    background-color: rgb(223, 222, 222);
 }
 
 .home-note {
@@ -121,17 +125,9 @@ form button {
     width: 80%;
 }
 
-.np {
-    width: fit-content;
-    margin: 0 auto;
-    font-size: 1rem
-}
-
 .nav-buttons {
     color: rgb(13 110 253);
 }
-
-
 
 .user_form input {
     width: 25%;
@@ -193,4 +189,8 @@ div.pagination a {
 
 .text-start {
     width: 30%;
+}
+
+.text-muted {
+    opacity: 0.5;
 }

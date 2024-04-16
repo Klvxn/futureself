@@ -3,7 +3,7 @@ from django.db import models
 
 from tinymce.widgets import TinyMCE
 
-from .models import Letter
+from .models import Letter, Comment
 
 
 # Register your models here.
@@ -31,3 +31,5 @@ class LetterAdmin(admin.ModelAdmin):
         queryset.update(audience='private')
         self.message_user(request, 'Marked as private')    
         
+
+admin.site.register(Comment)

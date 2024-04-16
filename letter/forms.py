@@ -5,7 +5,7 @@ from django.utils import timezone
 
 from tinymce.widgets import TinyMCE
 
-from .models import Letter
+from .models import Letter, Comment
 
 
 # Forms
@@ -35,3 +35,10 @@ class LetterForm(forms.ModelForm):
     #     if date - now < timedelta(days=28):
     #         raise forms.ValidationError('Date should be at least a month from now.')
     #     return date
+
+
+class CommentForm(forms.ModelForm):
+    
+    class Meta:
+        model = Comment
+        fields = ('user', 'comment')

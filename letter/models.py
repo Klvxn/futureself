@@ -9,8 +9,8 @@ from django.utils import timezone
 # Create your models here.
 class Letter(models.Model):
 
-    class AudienceChoices(models.TextChoices):
-        PUBLIC = 'public, but as anon'
+    class Audience(models.TextChoices):
+        PUBLIC_ANON = 'public, but as anon'
         PRIVATE = 'private'
 
     id = models.UUIDField(unique=True, primary_key=True, default=uuid.uuid4)
@@ -20,7 +20,7 @@ class Letter(models.Model):
     delivery_date = models.DateField()
     date_posted = models.DateTimeField(default=timezone.now)
     email_address = models.EmailField()
-    audience = models.CharField(max_length=20, choices=AudienceChoices.choices)
+    audience = models.CharField(max_length=20, choices=Audience.choices)
     delivered = models.BooleanField(default=False)
 
     class Meta:
@@ -31,3 +31,16 @@ class Letter(models.Model):
 
     def get_absolute_url(self):
         return reverse('letter:letter_detail', kwargs={'pk': self.id})
+
+
+class Comment(models.Model):
+    
+    user = models.CharField(max_length=100, null=True)
+    comment = models.TextField()
+    letter = models.ForeignKey(Letter, on_delete=models.CASCADE)
+    parent_comment = models.ForeignKey('self', null=True, on_delete=models.SET_NULL, related_name='replies')
+    date_posted = models.DateTimeField(default=timezone.now)
+    
+    def __str__(self):
+        return f'Comment by {self.user if self.user else "Anonymous"}'
+    

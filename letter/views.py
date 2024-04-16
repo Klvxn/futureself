@@ -11,8 +11,8 @@ from django.views.decorators.http import require_http_methods
 
 from django_htmx.http import HttpResponseLocation
 
-from .forms import LetterForm
-from .models import Letter
+from .forms import LetterForm, CommentForm
+from .models import Letter, Comment
 
 
 # Create your views here.
@@ -45,10 +45,35 @@ class LetterDetailView(DeletionMixin, DetailView):
     template_name = 'letter_detail.html'
     context_object_name = 'letter'
     success_url = reverse_lazy('letter:my_letters')
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['comment_form'] = CommentForm
+        return context
 
     @method_decorator(login_required)
     def post(self, request, *args, **kwargs):
         return super().post(request, *args, **kwargs)
+    
+
+def get_comment_form(request, letter_id):
+    letter = get_object_or_404(Letter, id=letter_id)
+    form = CommentForm()
+    context = {'form': form, 'letter': letter}
+    return render(request, 'comment_form.html', context)
+
+
+# @require_http_methods(["POST", "PUT"])
+def post_comment(request, letter_id):
+    letter = get_object_or_404(Letter, id=letter_id)
+    form = CommentForm(request.POST)
+    form.is_valid()
+    comment = form.save(commit=False)
+    comment.user = f'{request.user}' if request.user.is_authenticated else form.cleaned_data['user']
+    comment.letter = letter
+    comment.save()
+    messages.success(request, 'Comment posted!')
+    return HttpResponseLocation(letter.get_absolute_url())
 
 
 @login_required
@@ -87,5 +112,5 @@ class PublicLettersView(ListView):
     context_object_name = 'public_letters'
     template_name = 'public_letters.html'
     queryset = Letter.objects.filter(audience='public, but as anon', delivered=True)
-    paginate_by = 3
+    paginate_by = 10
     

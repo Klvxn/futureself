@@ -5,10 +5,12 @@
 <div class="container-fluid width">
   <h3 class="heading">Public Letters From The Past</h3>
   {% for letter in public_letters %}
-    <div class="hover px-4 pb-5 pt-3 my-5">
-      <p class="text-center"><b> A LETTER FROM {{ letter.date_posted.date|safe }} </b></p>
-      <a href="{{ letter.get_absolute_url }}"> {{ letter|upper }} </a> <br>
-      {{ letter.content|safe|truncatewords:20 }}
+    <div class="hover px-4 pb-5 pt-3">
+      <div class="text-center">
+        <a href="{{ letter.get_absolute_url }}" class="fs-5"> {{ letter|upper }} </a> <br>
+      </div>
+      <p class="text-center fs-5 my-1">< A LETTER FROM {{ letter.date_posted.date }} ></p>
+      <div class="letter-content">{{ letter.content|truncatewords_html:40|safe }}</div>
       <hr>
       <div>
         <span class="text-muted small float-start">🚀 Time travelled: {{ letter.date_posted|timesince:letter.delivery_date }}</span>	
@@ -21,10 +23,11 @@
     <div class="pagination d-block">
       <nav aria-label="Page navigation example" class="fst-italic">
         <ul class="pagination">
+          {% if not page_obj.has_next %}
+            <li class="page-item"><a href="?page=1" class="page-link">jump to first</a></li>
+          {% endif %}
           {% if page_obj.has_previous %}
             <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a></li>
-          {% else %}
-            <li class="page-item"><a href="?page={{ page_obj.paginator.num_pages }}" class="page-link">jump to last</a></li>
           {% endif %}
           {% for page in page_obj.paginator.page_range %}   
             {% if page_obj.number == page %}    
@@ -33,15 +36,14 @@
           {% endfor %}
           {% if page_obj.has_next %}
             <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a></li>
-          {% else %}
-            <li class="page-item"><a href="?page=1" class="page-link">jump to first</a></li>
+          {% endif %}
+          {% if not page_obj.has_previous %}
+            <li class="page-item"><a href="?page={{ page_obj.paginator.num_pages }}" class="page-link">jump to last</a></li>
           {% endif %}
         </ul>
       </nav>
       <div class="step-links">
-        <span class="text-muted">
-          page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-        </span>
+        <span class="text-muted">{{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</span>
       </div>
     </div>
   {% endif %}

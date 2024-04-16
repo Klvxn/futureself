@@ -13,15 +13,14 @@
     <button type="button" class="btn-close ms-auto float-end" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
 {% endif %}
-<div class="container-fluid width">
+<div class="container-fluid width" style="width: 70%;">
   <h3 class="heading"> {{ blog.title|title }} </h3>   
-  <img src="{{ blog.image.url }}" alt="" class="img-fluid rounded mx-auto d-block p-3" >
-
+  <img src="{{ blog.image.url }}" alt="" class="img-fluid rounded mx-auto d-block p-3" height="10" width="360">
   <div id="writer" class="my-3">
     <span>By {{ blog.writer }}</span><br>
     <span>{{ blog.date_posted.date }}</span>
   </div>
-  <div>
+  <div style="font-family: Arial, Helvetica, sans-serif;">
     <p>{{ blog.content|capfirst|safe }}</p>
   </div>
   {% if request.user == blog.writer %}

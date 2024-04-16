@@ -21,7 +21,7 @@
         <img src="{{ blog.image.url }}" alt="" class="flex-start rounded-4" width="190" height="190">
         <div class="flex-end px-3" style="width: calc(100% - 190px);">
           <a href="{{ blog.get_absolute_url }}"> <h5>{{ blog|title }}</h5></a> 
-          <p>{{ blog.content|truncatewords:20|safe }}</p>
+          <p>{{ blog.content|truncatewords_html:25|safe }}</p>
           <div id="writer">
             <hr class="mb-0">
             <span class="small">
@@ -41,10 +41,11 @@
     <div class="pagination d-block">
       <nav aria-label="Page navigation example" class="fst-italic">
         <ul class="pagination">
+          {% if not page_obj.has_next %}
+            <li class="page-item"><a href="?page=1" class="page-link">jump to first</a></li>
+          {% endif %}
           {% if page_obj.has_previous %}
             <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a></li>
-          {% else %}
-            <li class="page-item"><a href="?page={{ page_obj.paginator.num_pages }}" class="page-link">jump to last</a></li>
           {% endif %}
           {% for page in page_obj.paginator.page_range %}   
             {% if page_obj.number == page %}    
@@ -53,15 +54,14 @@
           {% endfor %}
           {% if page_obj.has_next %}
             <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a></li>
-          {% else %}
-            <li class="page-item"><a href="?page=1" class="page-link">jump to first</a></li>
+          {% endif %}
+          {% if not page_obj.has_previous %}
+            <li class="page-item"><a href="?page={{ page_obj.paginator.num_pages }}" class="page-link">jump to last</a></li>
           {% endif %}
         </ul>
       </nav>
       <div class="step-links">
-        <span class="text-muted">
-          page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-        </span>
+        <span class="text-muted fst-italic">{{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</span>
       </div>
     </div>
   {% endif %}

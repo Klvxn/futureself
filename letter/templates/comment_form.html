@@ -1,0 +1,11 @@
+<form action="{% url 'letter:post_comment' letter.id %}" method="post" class="comment-form" hx-boost="true">
+  {% csrf_token %}
+  <div class="form-group">
+    <label for="user"></label>
+    <input type="text" class="form-control" id="user" name="user" placeholder="Name" required>
+    <label for="comment"></label>
+    <textarea class="form-control" id="comment" name="comment" rows="3" placeholder="Comment" required></textarea>
+  </div>
+  <button type="submit" class="btn btn-primary my-3">Post</button>
+</form>
+<hr>

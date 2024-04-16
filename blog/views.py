@@ -20,7 +20,7 @@ class BlogListView(ListView):
     template_name = 'blog_list.html'
     queryset = Blog.objects.filter(status='published')
     context_object_name = 'blogs_list'
-    paginate_by = 2
+    paginate_by = 10
 
 
 class BlogDetailView(DeletionMixin, DetailView):

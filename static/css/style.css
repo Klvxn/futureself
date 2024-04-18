@@ -95,10 +95,6 @@ input:focus {
     background-color: rgb(223, 222, 222);
 }
 
-.home-note {
-    width: 60%;
-}
-
 .form-group-lg div {
     margin: 1rem 0rem ;
 }
@@ -121,19 +117,12 @@ form button {
     box-shadow: none;
 }
 
-#letters {
-    width: 80%;
-}
-
 .nav-buttons {
     color: rgb(13 110 253);
 }
 
 .user_form input {
     width: 25%;
-}
-
-.user_form input {
     padding: 5px;
 }
 
@@ -150,10 +139,6 @@ form button {
 .error {
     color: #dc3545;
     list-style-type: none;
-}
-
-#home-form .sm-input {
-    width: 73%;
 }
 
 .audience {
@@ -181,10 +166,6 @@ div.pagination a {
 
 .tox.tox-tinymce {
     width: 720px;
-}
-
-.create-btn {
-    margin-top: 11.6rem;
 }
 
 .text-start {

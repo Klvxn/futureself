@@ -3,12 +3,14 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseForbidden
 from django.urls import reverse_lazy
+from django.shortcuts import render
 from django.utils.text import slugify
 from django.utils.decorators import method_decorator
 from django.views.generic import ListView, UpdateView, CreateView, DetailView
 from django.views.generic.edit import DeletionMixin
+from django.views.decorators.http import require_http_methods
 
-from django_htmx.http import HttpResponseLocation
+from django_htmx.http import HttpResponseClientRedirect
 
 from .models import Blog
 from .forms import BlogForm
@@ -57,15 +59,18 @@ class BlogCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
     
 
-@login_required
+@require_http_methods(["POST"])
 def update_like(request, slug):
     blog = Blog.objects.get(slug=slug)
+    if not request.user.is_authenticated:
+        blog_like_url = f'{blog.get_absolute_url()}#liked_info'
+        return HttpResponseClientRedirect(f'/auth/login?next={blog_like_url}')
     if request.user in blog.liked_by.all():
         blog.liked_by.remove(request.user)
     else:
         blog.liked_by.add(request.user)
     blog.save()
-    return HttpResponseLocation(blog.get_absolute_url())
+    return render(request, 'partials/liked_by.html', {'blog': blog})
 
 
 class BlogEditView(LoginRequiredMixin, UpdateView):
@@ -73,18 +78,12 @@ class BlogEditView(LoginRequiredMixin, UpdateView):
     model = Blog
     form_class = BlogForm
     template_name = 'blog_edit.html'
-
-    def get(self, request, *args, **kwargs):
+    
+    def dispatch(self, request, *args, **kwargs):
         obj = self.get_object()
         if request.user != obj.writer:
             return HttpResponseForbidden()
-        return super().get(request, *args, **kwargs)
-
-    def post(self, request, *args, **kwargs):
-        obj = self.get_object()
-        if request.user != obj.writer:
-            return HttpResponseForbidden()
-        return super().post(request, *args, **kwargs)
+        return super().dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
         form.instance.slug = slugify(form.instance.title)

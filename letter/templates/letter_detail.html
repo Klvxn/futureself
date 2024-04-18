@@ -31,15 +31,7 @@
       {% if request.user == letter.user %}
         <div class="my-5">
           <h4>Audience</h4>
-          {% if letter.audience == "private" %}
-            <p> Currently set to: <span class="audience badge bg-info">{{ letter.audience|capfirst }} </span> <br>
-            <span>Only you would be able to see this email. </span> <br>
-            <span>Change audience to: <button class="btn btn-outline-secondary btn-sm" hx-post="{% url 'letter:update_letter' letter.id %}">Public</button> </span> </p>
-          {% else %}
-            <p> Currently set to: <span class="audience badge bg-secondary">{{ letter.audience|capfirst }} </span> <br>
-            <span>Other users will be able to see the content of this letter but your email address won't be visible to the public. </span> <br>
-            <span>Change audience to:  &ThickSpace;<button class="btn btn-outline-info btn-sm" hx-post="{% url 'letter:update_letter' letter.id %}">🔐 Private</button> </span> </p>
-          {% endif %}
+          {% include "partials/audience.html" %}
         </div>
         <div class="my-5">
           <h4>Delete</h4>
@@ -71,7 +63,7 @@
         {% if letter.audience == 'public, but as anon' or request.user == letter.user %}
           <hr class="">
           <h4>{{ letter.comment_set.count }} {{ letter.comment_set.count|pluralize:"Comment,Comments"|title }}
-            <button class="float-end link-primary border-0 fs-6 p-1" hx-get="/comment/new/{{ letter.id }}/" hx-target="#commentform" hx-swap="OuterHTML">+ Add</button>
+            <button class="float-end link-primary border-0 fs-6 p-1" hx-get="/comment/new/{{ letter.id }}/" hx-target="#commentform" hx-swap="outerHTML">+ Add</button>
           </h4>
           <div id="commentform"></div>
           {% for comment in letter.comment_set.all %}

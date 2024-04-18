@@ -51,9 +51,6 @@
     </div>
   {% endif %}
   <hr>
-  <div class="like-info mb-5 fs-2 p-2">
-    <i class="bi bi-suit-heart{% if request.user in blog.liked_by.all %}-fill{% endif %}" hx-post="{% url 'blog:update_like' blog.slug %}"></i>
-    <span class="fst-italic fs-5">{{ blog.liked_by.count }} </span>
-  </div>
+  {% include "partials/liked_by.html" %}
 </div>
 {% endblock %}

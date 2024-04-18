@@ -12,7 +12,7 @@ from django.views.decorators.http import require_http_methods
 from django_htmx.http import HttpResponseLocation
 
 from .forms import LetterForm, CommentForm
-from .models import Letter, Comment
+from .models import Letter
 
 
 # Create your views here.
@@ -32,7 +32,7 @@ class HomeView(CreateView):
         
 
 @login_required
-def get_my_letters(request):
+def current_user_letters(request):
     travelling = Letter.objects.filter(user=request.user, delivered=False)
     delivered = Letter.objects.filter(user=request.user, delivered=True)
     context = {'travelling_letters': travelling, 'delivered_letters': delivered}
@@ -60,10 +60,9 @@ def get_comment_form(request, letter_id):
     letter = get_object_or_404(Letter, id=letter_id)
     form = CommentForm()
     context = {'form': form, 'letter': letter}
-    return render(request, 'comment_form.html', context)
+    return render(request, 'partials/comment_form.html', context)
 
 
-# @require_http_methods(["POST", "PUT"])
 def post_comment(request, letter_id):
     letter = get_object_or_404(Letter, id=letter_id)
     form = CommentForm(request.POST)
@@ -77,7 +76,7 @@ def post_comment(request, letter_id):
 
 
 @login_required
-@require_http_methods(["POST", "PUT"])
+@require_http_methods(["POST"])
 def update_letter_audience(request, pk):
     letter = get_object_or_404(Letter, id=pk, user=request.user)
     if letter.user != request.user:
@@ -87,8 +86,7 @@ def update_letter_audience(request, pk):
     elif letter.audience == 'public, but as anon':
         letter.audience = 'private'
     letter.save()
-    messages.success(request, 'Changes saved!')
-    return HttpResponseLocation(letter.get_absolute_url())
+    return render(request, 'partials/audience.html', {'letter': letter})
 
 
 class LetterCreateView(LoginRequiredMixin, CreateView):

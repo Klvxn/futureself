@@ -14,7 +14,7 @@
   </div>
 {% endif %}
 <div class="home d-flex justify-content-evenly">
-  <div class="home-note">
+  <div style="width: 60%;">
     <h2 class="heading text-start mt-3 mb-5"> Welcome to Futureself 🔮 </h2>
     <p> 
       <blockquote class="fs-5">
@@ -38,9 +38,9 @@
         <p class="fst-italic fs-5">Allow us be your personal time capsule, helping you connect with your past and future ⌛</p>
     </div>
   </div>
-  <div class="align-self-center home-img text-center mt-5">
+  <div class="align-self-center text-center mt-5">
     <img src="/static/images/_c451e483-d872-4870-9877-8637eb489b74.jpeg" alt="Letter in motion" width="360" class="img-fluid mt-lg-2">
-    <a class="btn btn-outline-primary m-3 sm-input" href='{% url "letter:create_letter" %}'>Take me to the Future</a>
+    <a class="btn btn-outline-primary m-3" href='{% url "letter:create_letter" %}'>Take me to the Future</a>
   </div>
 </div>
 {% endblock content %}

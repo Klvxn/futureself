@@ -19,7 +19,7 @@
       <span class="text-muted">🚀 Time travelled: {{ letter.date_posted|timesince:letter.delivery_date }}</span> <br>
       <span class="text-muted">{{ letter.date_posted.date }} &rightarrow; {{ letter.delivery_date }}</span><br>
       <h3>A Letter From The Past </h3>	
-      {% if request.user == letter.user %}
+      {% if user == letter.user %}
         <span class="text-muted"> 📬 Received: {{ letter.email_address }}</span>
       {% endif %}
     </div>
@@ -28,7 +28,7 @@
         <h4> {{ letter.title|title }} </h4>
         <p> {{ letter.content|safe }} </p>
       </div>
-      {% if request.user == letter.user %}
+      {% if user == letter.user %}
         <div class="my-5">
           <h4>Audience</h4>
           {% include "partials/audience.html" %}
@@ -60,7 +60,7 @@
         </div>
       {% endif %}
       {% if letter.comment_set %}    
-        {% if letter.audience == 'public, but as anon' or request.user == letter.user %}
+        {% if letter.audience == 'public, but as anon' or user == letter.user %}
           <hr class="">
           <h4>{{ letter.comment_set.count }} {{ letter.comment_set.count|pluralize:"Comment,Comments"|title }}
             <button class="float-end link-primary border-0 fs-6 p-1" hx-get="/comment/new/{{ letter.id }}/" hx-target="#commentform" hx-swap="outerHTML">+ Add</button>
@@ -71,7 +71,7 @@
               <div class="card-body">
                 <div style="font-size: smaller;">{{ comment.user }} <span class="text-muted float-end" style="font-size: smaller;">{{ comment.date_posted|timesince }} ago </span></div>
                 <div> > {{ comment.comment }}</div>
-                <!-- {% if comment.user == request.user.username %} <button>Delete</button> {% endif %} -->
+                <!-- {% if comment.user == user.username %} <button>Delete</button> {% endif %} -->
               </div> 
             </div>
           {% endfor %}
@@ -89,7 +89,7 @@
       <span>🚀 Time travelled: Travelling</span> <br>
       <h3>A Letter From The Past </h3>	
       <span>From the past &rightarrow; to the future</span><br>
-      {% if request.user == letter.user %}
+      {% if user == letter.user %}
         <span> 📬 Received: {{ letter.email_address }}</span>
       {% endif %}
     </div>
@@ -103,7 +103,7 @@
         </p>
       </div>
       <div class="mt-5">
-        {% if request.user == letter.user %}
+        {% if user == letter.user %}
           <h5>Audience</h5>
           {% if letter.audience == "private" %}
             Currently set to: <span class="badge bg-info p-1">{{ letter.audience }} </span> <br>

@@ -23,7 +23,7 @@
   <div style="font-family: Arial, Helvetica, sans-serif;">
     <p>{{ blog.content|capfirst|safe }}</p>
   </div>
-  {% if request.user == blog.writer %}
+  {% if user == blog.writer %}
     <div class="my-5">
       <a href="{% url 'blog:blog_edit' blog.slug blog.date_posted.year blog.date_posted.month %}" class="btn btn-outline-primary">Edit blog</a>
 

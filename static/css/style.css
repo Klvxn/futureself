@@ -2,176 +2,197 @@
 @import url('https://fonts.googleapis.com/css2?family=Miriam+Libre:wght@400;700&family=Space+Grotesk&display=swap');
 
 body {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 ul.nav-item {
-    display: flex;
+  display: flex;
 }
 
 li.nav-item {
-    display: inline;
+  display: inline;
 }
 
 .nav-link {
-    color: white;
+  color: white;
 }
 
 .form {
-    text-align: center;
-    font-family: 'Lato', sans-serif;
-    margin: 0 auto;
+  text-align: center;
+  font-family: 'Lato', sans-serif;
+  margin: 0 auto;
 }
 
 .errorlist {
-    color: #dc3545;
-    text-align: center;
-    list-style-type: none;
+  color: #dc3545;
+  text-align: center;
+  list-style-type: none;
 }
 
 .heading, .letter-heading {
-    font-family: 'Lato', sans-serif;
-    text-align: center;
-    margin: 2rem auto;
+  font-family: 'Lato', sans-serif;
+  text-align: center;
+  margin: 2rem auto;
 }
 
 blockquote, .home {
-    font-family: "Miriam Libre", sans-serif;
-    font-weight: 400;
-    font-style: normal;
+  font-family: "Miriam Libre", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 button {
-    font-family: 'Miriam Libre', sans-serif ;
+  font-family: 'Miriam Libre', sans-serif ;
 }
 
 .letter-heading, h4, h5 {
-    font-family: 'Lato', sans-serif;
-    font-weight: lighter;
+  font-family: 'Lato', sans-serif;
+  font-weight: lighter;
 }
 
 #length {
-    float: right;
+  float: right;
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 p {
-    line-height: 2;
+  line-height: 2;
 }
 
 .width {
-    margin: 0 auto;
-    width: 65%;
+  margin: 0 auto;
+  width: 65%;
 }
 
 .hover:hover {
-    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+  box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
 }
 
 #writer {
-    color: darkgray;
+  color: darkgray;
 }
 
 input {
-    border: .12rem lightgray solid;
-    padding: .5rem;
-    border-top: 0;
-    border-right: 0;
-    border-left: 0;
+  border: .12rem lightgray solid;
+  padding: .5rem;
+  border-top: 0;
+  border-right: 0;
+  border-left: 0;
 }
 
 input::placeholder {
-    color: lightgray;
+  color: lightgray;
 }
 
 input:focus {
-    outline: none;
-    border-bottom: 1px solid #0d6efd;
-    border-left: 0;
-    background-color: rgb(223, 222, 222);
+  outline: none;
+  border-bottom: 1px solid #0d6efd;
+  border-left: 0;
+  background-color: #f2f2f2;
+  transition: all ease-in-out .3s;
 }
 
 .form-group-lg div {
-    margin: 1rem 0rem ;
+  margin: 1rem 0rem ;
 }
 
 form button {
-    width: 30%;
+  width: 30%;
 }
 
 .input-group {
-    width: 40% ;
-    justify-self: center;
+  width: 40% ;
+  justify-self: center;
 }
 
 .input-group input {
-    width: 50% !important;
+  width: 50% !important;
 }
 
 .input-group input:focus {
-    text-align: center;
-    box-shadow: none;
+  text-align: center;
+  box-shadow: none;
 }
 
 .nav-buttons {
-    color: rgb(13 110 253);
+  color: rgb(13 110 253);
 }
 
 .user_form input {
-    width: 25%;
-    padding: 5px;
+  width: 25%;
+  padding: 5px;
 }
 
 .blur {
-    color: transparent;
-    text-shadow: 0 0 8px #000;
-    opacity: 0.5;
+  color: transparent;
+  text-shadow: 0 0 8px #000;
+  opacity: 0.5;
 }
 
 .help_text, .error {
-    font-size: .82rem;
+  font-size: .82rem;
 }
 
 .error {
-    color: #dc3545;
-    list-style-type: none;
+  color: #dc3545;
+  list-style-type: none;
 }
 
 .audience {
-    border-radius: 0;
+  border-radius: 0;
 }
 
 button, .btn {
-    border-radius: .3rem !important;
+  border-radius: .3rem !important;
 }
 
 div.pagination {
-    margin-top: 10rem;
-    margin-bottom: 5rem;
-    font-size: normal;
+  margin-top: 10rem;
+  margin-bottom: 5rem;
+  font-size: normal;
 }
 
 div.pagination a {
-    font-size: small;
+  font-size: small;
 }
 
 .blog-txtarea .tox.tox-tinymce {
-    margin: 0 auto;
-    width: 840px;
+  margin: 0 auto;
+  width: 840px;
 }
 
 .tox.tox-tinymce {
-    width: 720px;
+  width: 720px;
 }
 
 .text-start {
-    width: 30%;
+  width: 30%;
 }
 
 .text-muted {
-    opacity: 0.5;
+  opacity: 0.5;
+}
+
+button.shadow:hover {
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+  transform: translateY(-1px); 
+}
+
+button.shadow:active {
+  transform: translateY(1px); 
+  box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.2); 
+}
+
+button.shadow {
+  background-color: #3498db; 
+  color: white; 
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
 }

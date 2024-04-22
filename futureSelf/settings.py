@@ -174,8 +174,12 @@ EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = os.environ["FROM_EMAIL"]
 
 # Login settings
+from django.urls import reverse_lazy
+
+LOGIN_URL = reverse_lazy('account:login')
 LOGIN_REDIRECT_URL = 'letter:my_letters'
-LOGOUT_REDIRECT_URL = 'letter:home'
+LOGOUT_REDIRECT_URL = reverse_lazy('letter:home')
+PASSWORD_RESET_TIMEOUT = 3600
 
 
 # Celery settings
